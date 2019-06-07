@@ -1,6 +1,6 @@
-# NgxBaristamaticDemo
+# Baristamatic Angular 8 Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2. Uses version 8 of the [Angular framework](https://v8.angular.io/docs).
 
 ## Development server
 
