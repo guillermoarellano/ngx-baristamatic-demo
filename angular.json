@@ -12,7 +12,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "barista",
+      "prefix": "app-barista",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
