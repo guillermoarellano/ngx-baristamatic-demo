@@ -53,7 +53,7 @@ export abstract class Ingredient extends Drink {
 
 export class Coffee extends Ingredient {
   constructor() {
-    super('Coffee', 0.75);
+    super('Coffee', 75);
   }
 
   clone(): Ingredient {
@@ -63,7 +63,7 @@ export class Coffee extends Ingredient {
 
 export class DecafCoffee extends Ingredient {
   constructor() {
-    super('Decaf Coffee', 0.75);
+    super('Decaf Coffee', 75);
   }
 
   clone(): Ingredient {
@@ -73,7 +73,7 @@ export class DecafCoffee extends Ingredient {
 
 export class Sugar extends Ingredient {
   constructor() {
-    super('Sugar', 0.25);
+    super('Sugar', 25);
   }
   clone(): Ingredient {
     return new Sugar();
@@ -82,7 +82,7 @@ export class Sugar extends Ingredient {
 
 export class Cream extends Ingredient {
   constructor() {
-    super('Cream', 0.25);
+    super('Cream', 25);
   }
   clone(): Ingredient {
     return new Cream();
@@ -91,7 +91,7 @@ export class Cream extends Ingredient {
 
 export class SteamedMilk extends Ingredient {
   constructor() {
-    super('Steamed Milk', 0.35);
+    super('Steamed Milk', 35);
   }
   clone(): Ingredient {
     return new SteamedMilk();
@@ -100,7 +100,7 @@ export class SteamedMilk extends Ingredient {
 
 export class FoamedMilk extends Ingredient {
   constructor() {
-    super('Foamed Milk', 0.35);
+    super('Foamed Milk', 35);
   }
   clone(): Ingredient {
     return new FoamedMilk();
@@ -109,7 +109,7 @@ export class FoamedMilk extends Ingredient {
 
 export class Espresso extends Ingredient {
   constructor() {
-    super('Espresso', 1.1);
+    super('Espresso', 110);
   }
   clone(): Ingredient {
     return new Espresso();
@@ -118,7 +118,7 @@ export class Espresso extends Ingredient {
 
 export class Cocoa extends Ingredient {
   constructor() {
-    super('Cocoa', 0.9);
+    super('Cocoa', 90);
   }
   clone(): Ingredient {
     return new Cocoa();
@@ -127,7 +127,7 @@ export class Cocoa extends Ingredient {
 
 export class WhippedCream extends Ingredient {
   constructor() {
-    super('Whipped Cream', 1.0);
+    super('Whipped Cream', 100);
   }
   clone(): Ingredient {
     return new WhippedCream();

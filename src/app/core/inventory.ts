@@ -23,7 +23,6 @@ export class Inventory {
 
   restock() {
     this.quantities.forEach((v, k) => this.quantities.set(k, 10));
-    // test this out
   }
 
   // We can add more ingredients once the inventory has been created
