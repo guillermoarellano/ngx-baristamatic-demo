@@ -13,6 +13,7 @@ export abstract class Recipe {
     this.inventory = inventory;
     this.name = name;
     this.setRecipe();
+    this.cost = this.drinkCost();
   }
 
   getCost(): number {

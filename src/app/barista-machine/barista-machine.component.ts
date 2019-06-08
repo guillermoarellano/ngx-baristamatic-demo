@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BaristaService } from '../core/barista.service';
 
 @Component({
   selector: 'app-barista-machine',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaristaMachineComponent implements OnInit {
 
-  constructor() { }
+  constructor(private baristaService: BaristaService) { }
 
   ngOnInit() {
+    this.load();
   }
 
+  load() {
+    this.baristaService.display();
+  }
 }
