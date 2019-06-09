@@ -1,6 +1,14 @@
-<p>
-  barista-machine works!
+<div>
+  <button (click)="handleRestockInventory()">Restock inventory</button>
+</div>
 
-  {{inventory | json}}
-  {{menuDrinks| json}}
-</p>
+<div *ngFor="let drink of menuDrinks">
+  <button type="button"
+          (click)="handleMakeDrink(drink.name)" [disabled]="!drink.inStock">{{drink.name}}, {{drink.cost}}</button>
+  <span>{{drink.inStock}}</span>
+</div>
+<div>
+  <ul>
+    <li *ngFor="let item of inventory">{{item.ingredient}} - {{item.quantity}}</li>
+  </ul>
+</div>

@@ -73,6 +73,7 @@ export class BaristaService {
 
   restockInventory() {
     this.inventory.restock();
+    this.getInventory();
   }
   // Returns a new drink
   makeDrink(recipeName: string): Drink {
