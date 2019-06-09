@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BaristaService } from '../core/barista.service';
+import { BaristaService, BaristaMenuDrink } from '../core/barista.service';
+import { IngredientQuantity } from '../core/inventory.ts';
 
 @Component({
   selector: 'app-barista-machine',
@@ -7,14 +8,26 @@ import { BaristaService } from '../core/barista.service';
   styleUrls: ['./barista-machine.component.scss']
 })
 export class BaristaMachineComponent implements OnInit {
+  menuDrinks: BaristaMenuDrink[];
+  inventory: IngredientQuantity[];
 
   constructor(private baristaService: BaristaService) { }
 
   ngOnInit() {
-    this.load();
+    this.handleShowDrinksMenu();
   }
 
-  load() {
-    this.baristaService.display();
+  handleShowDrinksMenu() {
+    this.menuDrinks = this.baristaService.getDrinksMenu();
+    this.inventory = this.baristaService.getInventory();
   }
+
+  handleMakeDrink() {
+    // this.baristaService.makeDrink();
+  }
+
+  handleRestockInventory() {
+    this.baristaService.restockInventory();
+  }
+
 }

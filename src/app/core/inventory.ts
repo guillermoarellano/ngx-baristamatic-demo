@@ -1,5 +1,10 @@
 import { Ingredient, DecafCoffee, Sugar, Cream, Cocoa, Espresso, FoamedMilk, SteamedMilk, WhippedCream, Coffee } from './ingredient';
 
+export interface IngredientQuantity {
+  ingredient: string;
+  quantity: number;
+}
+
 export class Inventory {
 
   private quantities = new Map<string, number>();
@@ -17,8 +22,15 @@ export class Inventory {
     this.loadIngredient(new Coffee());
   }
 
-  display() {
-    console.log(`Inventory: ${this.quantities}`);
+  getIngredientQuantities(): IngredientQuantity[] {
+    // console.log(Array.from(this.quantities));
+    return Array.from(this.quantities).map(item => {
+      const rObj: IngredientQuantity = {
+        ingredient: item[0],
+        quantity: item[1]
+      };
+      return rObj;
+    });
   }
 
   restock() {

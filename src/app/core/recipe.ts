@@ -47,11 +47,6 @@ export abstract class Recipe {
         }
       });
 
-      // for (Entry<String, Integer> ingredient : recipe.entrySet()) {
-      //   for (int i = 0; i < ingredient.getValue(); i++) {
-      //     drink = inventory.get(ingredient.getKey()).addTo(drink);
-      //   }
-      // }
       this.dispenseCoffee();
 
       return drink;
@@ -64,20 +59,15 @@ export abstract class Recipe {
 
   // Check if the required ingredients are available to make the drink
   isInStock(): boolean {
+    let result = true;
 
     this.recipe.forEach((ingredientVal, ingredientKey) => {
       if (!this.inventory.enoughOf(ingredientKey, ingredientVal)) {
-        return false;
+        result = false;
       }
     });
 
-    // for (Entry<String, Integer> ingredient : recipe.entrySet()) {
-    //   if (!inventory.enoughOf(ingredient.getKey(), ingredient.getValue())) {
-    //     return false;
-    //   }
-    // }
-
-    return true;
+    return result;
   }
 
   // Computes the cost of the drink specified by the recipe
@@ -89,12 +79,6 @@ export abstract class Recipe {
         cost += this.inventory.getCost(ingredientKey);
       }
     });
-
-    // for (Entry<String, Integer> ingredient : recipe.entrySet()) {
-    //   for (int i = 0; i < ingredient.getValue(); i++) {
-    //     cost += inventory.getCost(ingredient.getKey());
-    //   }
-    // }
 
     return cost;
   }

@@ -8,14 +8,22 @@ import {
   CaffeMochaRecipe,
   CappuccinoRecipe
 } from './recipe';
-import { Inventory } from './inventory';
+import { Inventory, IngredientQuantity } from './inventory';
 import { Drink } from './drink';
+
+export interface BaristaMenuDrink {
+  id: number;
+  name: string;
+  cost: number;
+  inStock: boolean;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaristaService {
   private recipes = new Map<string, Recipe>();
+  private inventory: Inventory;
 
   constructor(inventory: Inventory) {
     this.addRecipe(new CoffeeRecipe(inventory));
@@ -24,6 +32,7 @@ export class BaristaService {
     this.addRecipe(new CaffeAmericanoRecipe(inventory));
     this.addRecipe(new CaffeMochaRecipe(inventory));
     this.addRecipe(new CappuccinoRecipe(inventory));
+    this.inventory = inventory;
   }
 
   // Add a new recipe to the menu
@@ -35,33 +44,38 @@ export class BaristaService {
     }
   }
 
-  display() {
+  getDrinksMenu(): BaristaMenuDrink[] {
     console.log('Menu:');
     let i = 0;
 
     this.recipes.forEach((recipeVal, recipeKey) => {
       console.log(`${i + 1}, ${recipeKey}, $${recipeVal.getCost()}, ${recipeVal.isInStock()}`);
+      // console.log('recipeVal: ', recipeVal);
       i++;
     });
+    const recipesArr = Array.from(this.recipes.values());
 
-    // for (Entry<String, Recipe> recipe : recipes.entrySet()) {
-    // 	String price = String.format('%.2f', recipe.getValue().getCost());
-    // 	System.out.println( (i + 1 ) + ',' + recipe.getKey() + ',' + '$' + price + ',' + recipe.getValue().isInStock() );
-    // 	i++;
-    // }
+    return recipesArr.map(
+      (recipeObj, index) => {
+        const rObj: BaristaMenuDrink = {
+          id: index + 1,
+          name: recipeObj.name,
+          cost: recipeObj.getCost(),
+          inStock: recipeObj.isInStock()
+        };
+        return rObj;
+      });
   }
 
-  // Returns a new drink
-  makeDrink(index: number): Drink {
-    if (index < this.recipes.size) {
-      const it: Iterator<Recipe> = this.recipes.values();
-      for (let i = 0; i < index; i++) {
-        it.next();
-      }
+  getInventory(): IngredientQuantity[] {
+    return this.inventory.getIngredientQuantities();
+  }
 
-      return ((it.next() as unknown) as Recipe).makeDrink();
-    } else {
-      throw new RangeError();
-    }
+  restockInventory() {
+    this.inventory.restock();
+  }
+  // Returns a new drink
+  makeDrink(recipeName: string): Drink {
+    return this.recipes.get(recipeName).makeDrink();
   }
 }
