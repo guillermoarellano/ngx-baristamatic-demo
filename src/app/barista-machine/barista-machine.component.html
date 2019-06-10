@@ -16,12 +16,12 @@
   <div class="col-md-6">
     <nb-card [size]="'medium'">
       <nb-card-header>Inventory</nb-card-header>
-      <nb-card-body *ngIf="!loading">
+      <nb-card-body *ngIf="loading">
         <div class="dispensing-overlay">
-            <fa-icon [icon]="faCoffee" transform="grow-200" pulse="true"></fa-icon>
+            <fa-icon [icon]="faCoffee" transform="grow-200"></fa-icon>
         </div>
       </nb-card-body>
-      <nb-list *ngIf="loading">
+      <nb-list *ngIf="!loading">
         <nb-list-item *ngFor="let item of inventory">
           {{item.ingredient}} - {{item.quantity}}
         </nb-list-item>
