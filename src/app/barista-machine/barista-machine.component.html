@@ -1,14 +1,25 @@
-<div>
-  <button (click)="handleRestockInventory()">Restock inventory</button>
-</div>
-
-<div *ngFor="let drink of menuDrinks">
-  <button type="button"
-          (click)="handleMakeDrink(drink.name)" [disabled]="!drink.inStock">{{drink.name}}, {{drink.cost}}</button>
-  <span>{{drink.inStock}}</span>
-</div>
-<div>
-  <ul>
-    <li *ngFor="let item of inventory">{{item.ingredient}} - {{item.quantity}}</li>
-  </ul>
+<div class="row show-grid">
+  <div class="col-md-6">
+    <nb-card [size]="'medium'">
+      <nb-card-header>Drinks Menu</nb-card-header>
+      <nb-card-body>
+        <div *ngFor="let drink of menuDrinks">
+          <button nbButton
+                  (click)="handleMakeDrink(drink.name)"
+                  [disabled]="!drink.inStock">{{drink.name}}, {{drink.cost}}</button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-md-6">
+    <nb-card [size]="'medium'">
+      <nb-card-header>Inventory</nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let item of inventory">
+          {{item.ingredient}} - {{item.quantity}}
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+    <button nbButton status="warning" (click)="handleRestockInventory()">Restock inventory</button>
+  </div>
 </div>
