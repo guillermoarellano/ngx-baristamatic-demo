@@ -2,7 +2,9 @@
   <div class="col-md-6">
     <nb-card [size]="'medium'">
       <nb-card-header>Drinks Menu</nb-card-header>
-      <nb-card-body>
+      <nb-card-body [nbSpinner]="loading"
+                    nbSpinnerSize="giant"
+                    nbSpinnerMessage="'Dispensing...'">
         <div *ngFor="let drink of menuDrinks">
           <button nbButton
                   (click)="handleMakeDrink(drink.name)"
@@ -20,6 +22,8 @@
         </nb-list-item>
       </nb-list>
     </nb-card>
-    <button nbButton status="warning" (click)="handleRestockInventory()">Restock inventory</button>
+    <button nbButton
+            status="warning"
+            (click)="handleRestockInventory()">Restock inventory</button>
   </div>
 </div>

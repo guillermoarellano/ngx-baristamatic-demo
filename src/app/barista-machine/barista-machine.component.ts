@@ -10,8 +10,9 @@ import { IngredientQuantity } from '../core/inventory';
 export class BaristaMachineComponent implements OnInit {
   menuDrinks: BaristaMenuDrink[];
   inventory: IngredientQuantity[];
+  loading = false;
 
-  constructor(private baristaService: BaristaService) { }
+  constructor(private baristaService: BaristaService) {}
 
   ngOnInit() {
     this.refresh();
@@ -24,7 +25,7 @@ export class BaristaMachineComponent implements OnInit {
 
   handleMakeDrink(recipeName: string) {
     this.baristaService.makeDrink(recipeName);
-    this.refresh();
+    this.toggleLoadingAnimation();
   }
 
   handleRestockInventory() {
@@ -32,4 +33,11 @@ export class BaristaMachineComponent implements OnInit {
     this.refresh();
   }
 
+  toggleLoadingAnimation() {
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+      this.refresh();
+    }, 3000);
+  }
 }
