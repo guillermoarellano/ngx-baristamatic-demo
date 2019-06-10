@@ -6,10 +6,14 @@ import { BaristaMachineComponent } from './barista-machine.component';
 import {
   NbButtonModule,
   NbCardModule,
+  NbIconModule,
   NbLayoutModule,
   NbListModule,
   NbSpinnerModule
 } from '@nebular/theme';
+// Font Awesome 5.9.0
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [BaristaMachineComponent],
@@ -18,9 +22,11 @@ import {
     CommonModule,
     NbButtonModule,
     NbCardModule,
+    NbIconModule,
     NbLayoutModule,
     NbListModule,
-    NbSpinnerModule
+    NbSpinnerModule,
+    FontAwesomeModule
   ]
 })
 export class BaristaMachineModule {}
