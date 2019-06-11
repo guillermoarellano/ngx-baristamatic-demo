@@ -1,14 +1,40 @@
-<div>
-  <button (click)="handleRestockInventory()">Restock inventory</button>
-</div>
-
-<div *ngFor="let drink of menuDrinks">
-  <button type="button"
-          (click)="handleMakeDrink(drink.name)" [disabled]="!drink.inStock">{{drink.name}}, {{drink.cost}}</button>
-  <span>{{drink.inStock}}</span>
-</div>
-<div>
-  <ul>
-    <li *ngFor="let item of inventory">{{item.ingredient}} - {{item.quantity}}</li>
-  </ul>
+<div class="row-grid">
+  <div class="col-md-6">
+    <nb-card [size]="'medium'">
+      <nb-card-header>Drinks Menu</nb-card-header>
+      <nb-card-body [nbSpinner]="loading"
+                    nbSpinnerSize="giant"
+                    nbSpinnerMessage="'Dispensing...'">
+        <div class="card-body-content"
+             *ngFor="let drink of menuDrinks">
+          <button nbButton
+                  (click)="handleMakeDrink(drink.name)"
+                  [disabled]="!drink.inStock">{{drink.name}}, {{drink.cost | currency:'USD':'symbol':'1.2-2'}}</button>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-md-6">
+    <nb-card [size]="'medium'">
+      <nb-card-header>Inventory</nb-card-header>
+      <nb-card-body *ngIf="loading">
+        <div class="dispensing-overlay">
+          <div [@statusChange]="{value: state}"
+               (@statusChange.done)="onPulseAnimationDone($event)">
+            <fa-icon [icon]="faCoffee"
+                     transform="grow-150"></fa-icon>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-list @dispensingState
+               *ngIf="!loading">
+        <nb-list-item *ngFor="let item of inventory">
+          {{item.ingredient}} - {{item.quantity}}
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+    <button nbButton
+            status="warning"
+            (click)="handleRestockInventory()">Restock inventory</button>
+  </div>
 </div>

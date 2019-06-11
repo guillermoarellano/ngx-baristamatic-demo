@@ -45,14 +45,6 @@ export class BaristaService {
   }
 
   getDrinksMenu(): BaristaMenuDrink[] {
-    console.log('Menu:');
-    let i = 0;
-
-    this.recipes.forEach((recipeVal, recipeKey) => {
-      console.log(`${i + 1}, ${recipeKey}, $${recipeVal.getCost()}, ${recipeVal.isInStock()}`);
-      // console.log('recipeVal: ', recipeVal);
-      i++;
-    });
     const recipesArr = Array.from(this.recipes.values());
 
     return recipesArr.map(
