@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { pulse, flipInX, fadeInDown, fadeIn } from 'ng-animate';
+import { pulse, fadeIn } from 'ng-animate';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 import { BaristaService, BaristaMenuDrink } from '../core/barista.service';
