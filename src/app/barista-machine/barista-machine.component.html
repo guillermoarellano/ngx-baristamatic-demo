@@ -5,9 +5,10 @@
       <nb-card-body [nbSpinner]="loading"
                     nbSpinnerSize="giant"
                     nbSpinnerMessage="'Dispensing...'">
-        <div class="card-body-content"
-             *ngFor="let drink of menuDrinks">
-          <button nbButton
+        <div *ngFor="let drink of menuDrinks"
+             style="text-align: center">
+          <button class="drink-buttons"
+                  nbButton
                   (click)="handleMakeDrink(drink.name)"
                   [disabled]="!drink.inStock">{{drink.name}}, {{drink.cost | currency:'USD':'symbol':'1.2-2'}}</button>
         </div>
@@ -32,9 +33,14 @@
           {{item.ingredient}} - {{item.quantity}}
         </nb-list-item>
       </nb-list>
+      <nb-card-footer>
+        <div style="text-align: center">
+          <button nbButton
+                  status="warning"
+                  (click)="handleRestockInventory()"
+                  [disabled]="loading">Restock inventory</button>
+        </div>
+      </nb-card-footer>
     </nb-card>
-    <button nbButton
-            status="warning"
-            (click)="handleRestockInventory()">Restock inventory</button>
   </div>
 </div>
