@@ -18,10 +18,15 @@
       <nb-card-header>Inventory</nb-card-header>
       <nb-card-body *ngIf="loading">
         <div class="dispensing-overlay">
-            <fa-icon [icon]="faCoffee" transform="grow-200"></fa-icon>
+          <div [@statusChange]="{value: state}"
+               (@statusChange.done)="onPulseAnimationDone($event)">
+            <fa-icon [icon]="faCoffee"
+                     transform="grow-200"></fa-icon>
+          </div>
         </div>
       </nb-card-body>
-      <nb-list *ngIf="!loading">
+      <nb-list @dispensingState
+               *ngIf="!loading">
         <nb-list-item *ngFor="let item of inventory">
           {{item.ingredient}} - {{item.quantity}}
         </nb-list-item>
