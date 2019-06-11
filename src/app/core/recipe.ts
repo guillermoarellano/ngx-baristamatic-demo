@@ -28,11 +28,11 @@ export abstract class Recipe {
   public abstract setRecipe(): void;
 
   dispenseCoffee() {
-    console.log(`Dispensing: ${this.name}`);
+    // console.log(`Dispensing: ${this.name}`);
   }
 
   outOfStock() {
-    console.log(`Out of Stock: ${this.name}`);
+    // console.log(`Out of Stock: ${this.name}`);
   }
 
   // Returns the drink specified in the recipe or null if there are no enough ingredients in the inventory

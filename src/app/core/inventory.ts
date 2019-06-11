@@ -23,7 +23,6 @@ export class Inventory {
   }
 
   getIngredientQuantities(): IngredientQuantity[] {
-    // console.log(Array.from(this.quantities));
     return Array.from(this.quantities).map(item => {
       const rObj: IngredientQuantity = {
         ingredient: item[0],
