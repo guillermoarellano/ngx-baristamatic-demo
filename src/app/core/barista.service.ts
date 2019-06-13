@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
 import {
   Recipe,
   CoffeeRecipe,
@@ -9,7 +10,6 @@ import {
   CappuccinoRecipe
 } from './recipe';
 import { Inventory, IngredientQuantity } from './inventory';
-import { Drink } from './drink';
 
 export interface BaristaMenuDrink {
   id: number;
@@ -24,6 +24,9 @@ export interface BaristaMenuDrink {
 export class BaristaService {
   private recipes = new Map<string, Recipe>();
   private inventory: Inventory;
+
+  private recipesChangedSource = new BehaviorSubject<BaristaMenuDrink[]>(null);
+  recipesChanged$ = this.recipesChangedSource.asObservable();
 
   constructor(inventory: Inventory) {
     this.addRecipe(new CoffeeRecipe(inventory));
@@ -44,22 +47,12 @@ export class BaristaService {
     }
   }
 
-  getDrinksMenu(): BaristaMenuDrink[] {
-    const recipesArr = Array.from(this.recipes.values());
-
-    return recipesArr.map(
-      (recipeObj, index) => {
-        const rObj: BaristaMenuDrink = {
-          id: index + 1,
-          name: recipeObj.name,
-          cost: recipeObj.getCost(),
-          inStock: recipeObj.isInStock()
-        };
-        return rObj;
-      });
+  getDrinksMenu(): Observable<BaristaMenuDrink[]> {
+    return this.recipesChanged$;
   }
 
   getInventory(): IngredientQuantity[] {
+    this.drinksRecipesChanged();
     return this.inventory.getIngredientQuantities();
   }
 
@@ -67,8 +60,25 @@ export class BaristaService {
     this.inventory.restock();
     this.getInventory();
   }
+
   // Returns a new drink
-  makeDrink(recipeName: string): Drink {
-    return this.recipes.get(recipeName).makeDrink();
+  makeDrink(recipeName: string) {
+    this.recipes.get(recipeName).makeDrink();
   }
+
+  private drinksRecipesChanged() {
+    const recipesArr = Array.from(this.recipes.values());
+    const newRecipesArray = recipesArr.map((recipeObj, index) => {
+      const rObj: BaristaMenuDrink = {
+        id: index + 1,
+        name: recipeObj.name,
+        cost: recipeObj.getCost(),
+        inStock: recipeObj.isInStock()
+      };
+      return rObj;
+    });
+
+    this.recipesChangedSource.next(newRecipesArray);
+  }
+
 }

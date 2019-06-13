@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BaristaMachineComponent } from './barista-machine.component';
 // Nebular Design System
 import {
   NbButtonModule,
@@ -14,9 +13,12 @@ import {
 // Font Awesome 5.9.0
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import { BaristaMachineComponent } from './barista-machine.component';
+import { BaristaDrinksMenuComponent } from './barista-drinks-menu/barista-drinks-menu.component';
+
 
 @NgModule({
-  declarations: [BaristaMachineComponent],
+  declarations: [BaristaMachineComponent, BaristaDrinksMenuComponent],
   exports: [BaristaMachineComponent],
   imports: [
     CommonModule,

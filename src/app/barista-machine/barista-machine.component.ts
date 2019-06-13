@@ -5,6 +5,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 import { BaristaService, BaristaMenuDrink } from '../core/barista.service';
 import { IngredientQuantity } from '../core/inventory';
+import { Observable } from 'rxjs';
 
 const statusChange = trigger('statusChange', [
   transition('void => *', useAnimation(pulse)),
@@ -23,8 +24,8 @@ const dispensingState = trigger('dispensingState', [
   animations: [statusChange, dispensingState]
 })
 export class BaristaMachineComponent implements OnInit {
-  menuDrinks: BaristaMenuDrink[];
   inventory: IngredientQuantity[];
+  menuDrinks$: Observable<BaristaMenuDrink[]>;
   loading = false;
   faCoffee = faCoffee;
   state = 'start-state';
@@ -33,10 +34,10 @@ export class BaristaMachineComponent implements OnInit {
 
   ngOnInit() {
     this.refresh();
+    this.menuDrinks$ = this.baristaService.getDrinksMenu();
   }
 
   refresh() {
-    this.menuDrinks = this.baristaService.getDrinksMenu();
     this.inventory = this.baristaService.getInventory();
   }
 
