@@ -15,10 +15,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { BaristaMachineComponent } from './barista-machine.component';
 import { BaristaDrinksMenuComponent } from './barista-drinks-menu/barista-drinks-menu.component';
+import { BaristaDrinksInventoryComponent } from './barista-drinks-inventory/barista-drinks-inventory.component';
 
 
 @NgModule({
-  declarations: [BaristaMachineComponent, BaristaDrinksMenuComponent],
+  declarations: [BaristaMachineComponent, BaristaDrinksMenuComponent, BaristaDrinksInventoryComponent],
   exports: [BaristaMachineComponent],
   imports: [
     CommonModule,

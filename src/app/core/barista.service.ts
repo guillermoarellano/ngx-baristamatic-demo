@@ -26,7 +26,9 @@ export class BaristaService {
   private inventory: Inventory;
 
   private recipesChangedSource = new BehaviorSubject<BaristaMenuDrink[]>(null);
-  recipesChanged$ = this.recipesChangedSource.asObservable();
+  recipes$ = this.recipesChangedSource.asObservable();
+  private inventoryChangedSource = new BehaviorSubject<IngredientQuantity[]>(null);
+  inventory$ = this.inventoryChangedSource.asObservable();
 
   constructor(inventory: Inventory) {
     this.addRecipe(new CoffeeRecipe(inventory));
@@ -36,6 +38,7 @@ export class BaristaService {
     this.addRecipe(new CaffeMochaRecipe(inventory));
     this.addRecipe(new CappuccinoRecipe(inventory));
     this.inventory = inventory;
+    this.updateDrinksAndInventory();
   }
 
   // Add a new recipe to the menu
@@ -48,22 +51,27 @@ export class BaristaService {
   }
 
   getDrinksMenu(): Observable<BaristaMenuDrink[]> {
-    return this.recipesChanged$;
+    return this.recipes$;
   }
 
-  getInventory(): IngredientQuantity[] {
-    this.drinksRecipesChanged();
-    return this.inventory.getIngredientQuantities();
+  getInventory(): Observable<IngredientQuantity[]> {
+    return this.inventory$;
   }
 
   restockInventory() {
     this.inventory.restock();
-    this.getInventory();
+    this.updateDrinksAndInventory();
   }
 
   // Returns a new drink
   makeDrink(recipeName: string) {
     this.recipes.get(recipeName).makeDrink();
+    this.updateDrinksAndInventory();
+  }
+
+  private updateDrinksAndInventory() {
+    this.drinksRecipesChanged();
+    this.drinksInventoryChanged();
   }
 
   private drinksRecipesChanged() {
@@ -79,6 +87,10 @@ export class BaristaService {
     });
 
     this.recipesChangedSource.next(newRecipesArray);
+  }
+
+  private drinksInventoryChanged() {
+    this.inventoryChangedSource.next(this.inventory.getIngredientQuantities());
   }
 
 }

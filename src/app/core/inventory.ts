@@ -11,6 +11,7 @@ export class Inventory {
   private ingredients = new Map<string, Ingredient>();
 
   constructor() {
+    this.loadIngredient(new Coffee());
     this.loadIngredient(new DecafCoffee());
     this.loadIngredient(new Sugar());
     this.loadIngredient(new Cream());
@@ -19,7 +20,6 @@ export class Inventory {
     this.loadIngredient(new FoamedMilk());
     this.loadIngredient(new SteamedMilk());
     this.loadIngredient(new WhippedCream());
-    this.loadIngredient(new Coffee());
   }
 
   getIngredientQuantities(): IngredientQuantity[] {

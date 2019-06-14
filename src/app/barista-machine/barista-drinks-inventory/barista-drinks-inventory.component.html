@@ -1,0 +1,26 @@
+<nb-card [size]="'medium'">
+  <nb-card-header>Inventory</nb-card-header>
+  <nb-card-body *ngIf="loading">
+    <div class="dispensing-overlay">
+      <div [@statusChange]="{value: state}"
+           (@statusChange.done)="onPulseAnimationDone($event)">
+        <fa-icon [icon]="faCoffee"
+                 transform="grow-150"></fa-icon>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-list @dispensingState
+           *ngIf="!loading">
+    <nb-list-item *ngFor="let item of inventory">
+      {{item.ingredient}} - {{item.quantity}}
+    </nb-list-item>
+  </nb-list>
+  <nb-card-footer>
+    <div style="text-align: center">
+      <button nbButton
+              status="warning"
+              (click)="handleRestockInventory()"
+              [disabled]="loading">Restock inventory</button>
+    </div>
+  </nb-card-footer>
+</nb-card>
