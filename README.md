@@ -1,5 +1,8 @@
 # Baristamatic Angular Demo
 
+[![Build Status](https://travis-ci.org/guillermoarellano/ngx-baristamatic-demo.svg?branch=master)](https://travis-ci.org/guillermoarellano/ngx-baristamatic-demo)
+[![GitHub version](https://badge.fury.io/gh/guillermoarellano%2Fngx-baristamatic-demo.svg)](https://badge.fury.io/gh/guillermoarellano%2Fngx-baristamatic-demo)
+
 A working demo of the repo is deployed here: <https://baristamatic.netlify.com/>
 
 This project is generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2. It uses version 8 of the [Angular framework](https://v8.angular.io/docs).
