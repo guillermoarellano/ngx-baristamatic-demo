@@ -82,26 +82,21 @@ export abstract class Recipe {
 
     return cost;
   }
-
 }
 
 export class CoffeeRecipe extends Recipe {
-
   constructor(inventory: Inventory) {
     super('Coffee', inventory);
   }
-
 
   setRecipe() {
     this.addIngredient('Coffee', 3);
     this.addIngredient('Sugar', 1);
     this.addIngredient('Cream', 1);
   }
-
 }
 
 export class DecafCoffeeRecipe extends Recipe {
-
   constructor(inventory: Inventory) {
     super('Decaf Coffee', inventory);
   }
@@ -111,11 +106,9 @@ export class DecafCoffeeRecipe extends Recipe {
     this.addIngredient('Sugar', 1);
     this.addIngredient('Cream', 1);
   }
-
 }
 
 export class CaffeLatteRecipe extends Recipe {
-
   constructor(inventory: Inventory) {
     super('Caffe Latte', inventory);
   }
@@ -124,11 +117,9 @@ export class CaffeLatteRecipe extends Recipe {
     this.addIngredient('Espresso', 2);
     this.addIngredient('Steamed Milk', 1);
   }
-
 }
 
 export class CaffeAmericanoRecipe extends Recipe {
-
   constructor(inventory: Inventory) {
     super('Caffe Americano', inventory);
   }
@@ -136,11 +127,9 @@ export class CaffeAmericanoRecipe extends Recipe {
   setRecipe() {
     this.addIngredient('Espresso', 3);
   }
-
 }
 
 export class CaffeMochaRecipe extends Recipe {
-
   constructor(inventory: Inventory) {
     super('Caffe Mocha', inventory);
   }
@@ -151,11 +140,9 @@ export class CaffeMochaRecipe extends Recipe {
     this.addIngredient('Steamed Milk', 1);
     this.addIngredient('Whipped Cream', 1);
   }
-
 }
 
 export class CappuccinoRecipe extends Recipe {
-
   constructor(inventory: Inventory) {
     super('Cappuccino', inventory);
   }
@@ -165,5 +152,4 @@ export class CappuccinoRecipe extends Recipe {
     this.addIngredient('Steamed Milk', 1);
     this.addIngredient('Foamed Milk', 1);
   }
-
 }
