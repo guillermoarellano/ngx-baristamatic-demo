@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
 import {
   Recipe,
   CoffeeRecipe,
@@ -9,7 +10,6 @@ import {
   CappuccinoRecipe
 } from './recipe';
 import { Inventory, IngredientQuantity } from './inventory';
-import { Drink } from './drink';
 
 export interface BaristaMenuDrink {
   id: number;
@@ -25,6 +25,11 @@ export class BaristaService {
   private recipes = new Map<string, Recipe>();
   private inventory: Inventory;
 
+  private recipesChangedSource = new BehaviorSubject<BaristaMenuDrink[]>(null);
+  recipes$ = this.recipesChangedSource.asObservable();
+  private inventoryChangedSource = new BehaviorSubject<IngredientQuantity[]>(null);
+  inventory$ = this.inventoryChangedSource.asObservable();
+
   constructor(inventory: Inventory) {
     this.addRecipe(new CoffeeRecipe(inventory));
     this.addRecipe(new DecafCoffeeRecipe(inventory));
@@ -33,6 +38,7 @@ export class BaristaService {
     this.addRecipe(new CaffeMochaRecipe(inventory));
     this.addRecipe(new CappuccinoRecipe(inventory));
     this.inventory = inventory;
+    this.updateDrinksAndInventory();
   }
 
   // Add a new recipe to the menu
@@ -44,31 +50,47 @@ export class BaristaService {
     }
   }
 
-  getDrinksMenu(): BaristaMenuDrink[] {
-    const recipesArr = Array.from(this.recipes.values());
-
-    return recipesArr.map(
-      (recipeObj, index) => {
-        const rObj: BaristaMenuDrink = {
-          id: index + 1,
-          name: recipeObj.name,
-          cost: recipeObj.getCost(),
-          inStock: recipeObj.isInStock()
-        };
-        return rObj;
-      });
+  getDrinksMenu(): Observable<BaristaMenuDrink[]> {
+    return this.recipes$;
   }
 
-  getInventory(): IngredientQuantity[] {
-    return this.inventory.getIngredientQuantities();
+  getInventory(): Observable<IngredientQuantity[]> {
+    return this.inventory$;
   }
 
   restockInventory() {
     this.inventory.restock();
-    this.getInventory();
+    this.updateDrinksAndInventory();
   }
+
   // Returns a new drink
-  makeDrink(recipeName: string): Drink {
-    return this.recipes.get(recipeName).makeDrink();
+  makeDrink(recipeName: string) {
+    this.recipes.get(recipeName).makeDrink();
+    this.updateDrinksAndInventory();
   }
+
+  private updateDrinksAndInventory() {
+    this.drinksRecipesChanged();
+    this.drinksInventoryChanged();
+  }
+
+  private drinksRecipesChanged() {
+    const recipesArr = Array.from(this.recipes.values());
+    const newRecipesArray = recipesArr.map((recipeObj, index) => {
+      const rObj: BaristaMenuDrink = {
+        id: index + 1,
+        name: recipeObj.name,
+        cost: recipeObj.getCost(),
+        inStock: recipeObj.isInStock()
+      };
+      return rObj;
+    });
+
+    this.recipesChangedSource.next(newRecipesArray);
+  }
+
+  private drinksInventoryChanged() {
+    this.inventoryChangedSource.next(this.inventory.getIngredientQuantities());
+  }
+
 }

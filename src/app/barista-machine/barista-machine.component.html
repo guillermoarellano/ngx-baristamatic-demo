@@ -1,46 +1,9 @@
 <div class="row-grid">
-  <div class="col-md-6">
-    <nb-card [size]="'medium'">
-      <nb-card-header>Drinks Menu</nb-card-header>
-      <nb-card-body [nbSpinner]="loading"
-                    nbSpinnerSize="giant"
-                    nbSpinnerMessage="'Dispensing...'">
-        <div *ngFor="let drink of menuDrinks"
-             style="text-align: center">
-          <button class="drink-buttons"
-                  nbButton
-                  (click)="handleMakeDrink(drink.name)"
-                  [disabled]="!drink.inStock">{{drink.name}}, {{drink.cost | currency:'USD':'symbol':'1.2-2'}}</button>
-        </div>
-      </nb-card-body>
-    </nb-card>
-  </div>
-  <div class="col-md-6">
-    <nb-card [size]="'medium'">
-      <nb-card-header>Inventory</nb-card-header>
-      <nb-card-body *ngIf="loading">
-        <div class="dispensing-overlay">
-          <div [@statusChange]="{value: state}"
-               (@statusChange.done)="onPulseAnimationDone($event)">
-            <fa-icon [icon]="faCoffee"
-                     transform="grow-150"></fa-icon>
-          </div>
-        </div>
-      </nb-card-body>
-      <nb-list @dispensingState
-               *ngIf="!loading">
-        <nb-list-item *ngFor="let item of inventory">
-          {{item.ingredient}} - {{item.quantity}}
-        </nb-list-item>
-      </nb-list>
-      <nb-card-footer>
-        <div style="text-align: center">
-          <button nbButton
-                  status="warning"
-                  (click)="handleRestockInventory()"
-                  [disabled]="loading">Restock inventory</button>
-        </div>
-      </nb-card-footer>
-    </nb-card>
-  </div>
+  <app-barista-drinks-menu [loading]="loading"
+                           [menuDrinks]="menuDrinks$ | async"
+                           (makeDrink)="handleMakeDrink($event)"></app-barista-drinks-menu>
+
+  <app-barista-drinks-inventory [loading]="loading"
+                                [inventory]="inventory$ | async"
+                                (restockInventory)="handleRestockInventory($event)"></app-barista-drinks-inventory>
 </div>
