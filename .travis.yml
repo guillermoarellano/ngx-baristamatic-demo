@@ -1,0 +1,31 @@
+dist: trusty
+sudo: required
+
+language: node_js
+node_js:
+  - '10.13.0'
+
+branches:
+  only:
+    - master
+
+notifications:
+- email: false
+
+cache:
+  directories:
+    - 'node_modules'
+
+install:
+  - npm install
+
+script:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then npm run build; fi
+
+before_deploy: "echo 'ready for deployment?'"
+
+after_success:
+  - npx netlify-cli deploy --prod --dir=dist/ngx-baristamatic-demo --auth=$NETLIFY_PUBLISH_KEY --site=$NETLIFY_SITE_ID
+  - rm -rf node_modules/
+
+after_deploy: "echo 'completed deployment from Travis CI...'"
