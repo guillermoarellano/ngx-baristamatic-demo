@@ -1,10 +1,12 @@
 import { Ingredient, DecafCoffee, Sugar, Cream, Cocoa, Espresso, FoamedMilk, SteamedMilk, WhippedCream, Coffee } from './ingredient';
+import { Injectable } from "@angular/core";
 
 export interface IngredientQuantity {
   ingredient: string;
   quantity: number;
 }
 
+@Injectable()
 export class Inventory {
 
   private quantities = new Map<string, number>();
