@@ -10,8 +10,8 @@ import { IngredientQuantity } from '../core/inventory';
   styleUrls: ['./barista-machine.component.scss']
 })
 export class BaristaMachineComponent implements OnInit {
-  inventory$: Observable<IngredientQuantity[]>;
-  menuDrinks$: Observable<BaristaMenuDrink[]>;
+  inventory$: Observable<IngredientQuantity[]> | undefined;
+  menuDrinks$: Observable<BaristaMenuDrink[]> | undefined;
   loading = false;
 
   constructor(private baristaService: BaristaService) {}

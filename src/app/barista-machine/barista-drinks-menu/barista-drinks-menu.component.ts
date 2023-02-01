@@ -8,7 +8,7 @@ import { BaristaMenuDrink } from 'src/app/core/barista.service';
 })
 export class BaristaDrinksMenuComponent implements OnInit {
   @Input() loading = false;
-  @Input() menuDrinks: BaristaMenuDrink[];
+  @Input() menuDrinks: BaristaMenuDrink[] | undefined;
   @Output() makeDrink = new EventEmitter<string>();
 
   constructor() {}

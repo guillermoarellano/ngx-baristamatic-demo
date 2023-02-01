@@ -36,7 +36,7 @@ export abstract class Recipe {
   }
 
   // Returns the drink specified in the recipe or null if there are no enough ingredients in the inventory
-  makeDrink(): Drink {
+  makeDrink(): Drink | null {
     let drink: Drink;
     if (this.isInStock()) {
       drink = new Drink(this.name);

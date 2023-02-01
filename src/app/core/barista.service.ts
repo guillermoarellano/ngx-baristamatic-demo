@@ -25,9 +25,9 @@ export class BaristaService {
   private recipes = new Map<string, Recipe>();
   private inventory: Inventory;
 
-  private recipesChangedSource = new BehaviorSubject<BaristaMenuDrink[]>(null);
+  private recipesChangedSource = new BehaviorSubject<BaristaMenuDrink[]>([]);
   recipes$ = this.recipesChangedSource.asObservable();
-  private inventoryChangedSource = new BehaviorSubject<IngredientQuantity[]>(null);
+  private inventoryChangedSource = new BehaviorSubject<IngredientQuantity[]>([]);
   inventory$ = this.inventoryChangedSource.asObservable();
 
   constructor(inventory: Inventory) {
@@ -65,7 +65,7 @@ export class BaristaService {
 
   // Returns a new drink
   makeDrink(recipeName: string) {
-    this.recipes.get(recipeName).makeDrink();
+    this.recipes.get(recipeName)!.makeDrink();
     this.updateDrinksAndInventory();
   }
 

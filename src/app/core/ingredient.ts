@@ -1,7 +1,7 @@
 import { Drink } from './drink';
 
 export abstract class Ingredient extends Drink {
-  private drink: Drink;
+  private drink: Drink | undefined;
   private price: number;
 
   constructor(name: string, price: number) {
@@ -12,8 +12,8 @@ export abstract class Ingredient extends Drink {
   /**
    * Returns the name of the drink
    */
-  getDescription(): string {
-    return this.drink.getDescription();
+  override getDescription(): string {
+    return this.drink!.getDescription();
   }
 
   /**
@@ -37,7 +37,7 @@ export abstract class Ingredient extends Drink {
    * If it is not assigned to any drink, it will return the price of the ingredient.
    */
 
-  cost(): number {
+  override cost(): number {
     if (this.drink != null) {
       return this.price + this.drink.cost();
     } else {
