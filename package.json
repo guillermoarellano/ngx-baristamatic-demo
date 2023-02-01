@@ -8,8 +8,8 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "node ./scripts/build-pre.js && ng serve",
-    "build": "node ./scripts/build-pre.js && ng build --prod",
+    "start": "ng serve",
+    "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

@@ -74,7 +74,7 @@
               "browserTarget": "ngx-baristamatic-demo:build:production"
             },
             "development": {
-              "browserTarget": "ponyracer:build:development"
+              "browserTarget": "ngx-baristamatic-demo:build:development"
             }
           },
           "defaultConfiguration": "development"

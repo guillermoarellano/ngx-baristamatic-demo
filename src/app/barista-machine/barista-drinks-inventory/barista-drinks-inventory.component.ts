@@ -37,7 +37,7 @@ export class BaristaDrinksInventoryComponent implements OnInit {
     this.restockInventory.emit();
   }
 
-  onPulseAnimationDone(event: AnimationEvent) {
+  onPulseAnimationDone(event: any) {
     setTimeout(() => {
       this.state === 'start-state' ? (this.state = 'loop-state') : (this.state = 'start-state');
     }, 0);
