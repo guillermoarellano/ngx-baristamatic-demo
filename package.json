@@ -30,7 +30,7 @@
     "@nebular/eva-icons": "~9.0.3",
     "@nebular/theme": "~9.0.3",
     "eva-icons": "~1.1.1",
-    "ng-animate": "~1.0.0",
+    "ng-animate": "~2.0.1",
     "rxjs": "~7.5.0",
     "subsink": "^1.0.0",
     "tslib": "^2.3.0",

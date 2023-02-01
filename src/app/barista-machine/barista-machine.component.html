@@ -1,9 +1,7 @@
 <div class="row-grid">
-  <app-barista-drinks-menu [loading]="loading"
-                           [menuDrinks]="menuDrinks$ | async"
-                           (makeDrink)="handleMakeDrink($event)"></app-barista-drinks-menu>
+  <app-barista-drinks-menu [loading]="loading" [menuDrinks]="(menuDrinks$ | async) ?? []"
+    (makeDrink)="handleMakeDrink($event)"></app-barista-drinks-menu>
 
-  <app-barista-drinks-inventory [loading]="loading"
-                                [inventory]="inventory$ | async"
-                                (restockInventory)="handleRestockInventory()"></app-barista-drinks-inventory>
+  <app-barista-drinks-inventory [loading]="loading" [inventory]="(inventory$ | async) ?? []"
+    (restockInventory)="handleRestockInventory()"></app-barista-drinks-inventory>
 </div>

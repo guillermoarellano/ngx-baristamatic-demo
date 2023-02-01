@@ -24,7 +24,7 @@ const dispensingState = trigger('dispensingState', [
 })
 export class BaristaDrinksInventoryComponent implements OnInit {
   @Input() loading = false;
-  @Input() inventory: IngredientQuantity[];
+  @Input() inventory: IngredientQuantity[] | undefined;
   @Output() restockInventory = new EventEmitter();
   faCoffee = faCoffee;
   state = 'start-state';
