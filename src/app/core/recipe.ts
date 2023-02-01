@@ -39,7 +39,7 @@ export abstract class Recipe {
   makeDrink(): Drink {
     let drink: Drink;
     if (this.isInStock()) {
-      drink = new Drink(name);
+      drink = new Drink(this.name);
 
       this.recipe.forEach((ingredientVal, ingredientKey) => {
         for (let i = 0; i < ingredientVal; i++) {
